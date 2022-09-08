@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanjiali.blogadmin.mapper.blog.BlogMapper">
+    <resultMap id="blogsMap" type="com.tanjiali.blogadmin.pojo.blog.Blog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="content" column="content"/>
+        <result property="description" column="description"/>
+        <result property="published" column="is_published"/>
+        <result property="recommend" column="is_recommend"/>
+        <result property="appreciation" column="is_appreciation"/>
+        <result property="commentEnabled" column="is_comment_enabled"/>
+        <result property="top" column="is_top"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="views" column="views"/>
+        <result property="words" column="words"/>
+        <result property="readTime" column="read_time"/>
+        <result property="password" column="password"/>
+        <result property="userId" column="user_id"/>
+        <result property="categoryName" column="categoryName"/>
+    </resultMap>
+
+    <select id="blogs" resultMap="blogsMap">
+        SELECT
+            b.id,
+            title,
+            first_picture,
+            content,
+            description,
+            is_published,
+            is_recommend ,
+            is_appreciation ,
+            is_comment_enabled ,
+            create_time,
+            update_time,
+            views,
+            words,
+            read_time,
+            c.category_name AS categoryName,
+            is_top,
+            password,
+            user_id
+        FROM
+            blog b
+        LEFT JOIN category c
+        ON b.category_id=c.id
+        where 1=1
+        <if test="title!=null and title!=''">
+            and b.title like CONCAT('%',#{title},'%')
+        </if>
+        <if test="categoryId!=null">
+            and b.category_id=#{categoryId}
+        </if>
+    </select>
+</mapper>
