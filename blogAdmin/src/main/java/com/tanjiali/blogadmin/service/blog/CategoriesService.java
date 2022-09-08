@@ -18,5 +18,13 @@ public interface CategoriesService extends IService<Category> {
      * @param category
      * @return
      */
-    Boolean category(Category category);
+    Boolean addCategory(Category category);
+    /**
+     * 分类编辑
+     * @param category
+     * @return
+     */
+    Boolean editCategory(Category category);
+
+    Boolean deleteCategory(Integer id);
 }
