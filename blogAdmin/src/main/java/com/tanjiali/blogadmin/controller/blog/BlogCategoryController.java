@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Api(value = "博客管理")
+@Api(value = "博客分类管理")
 @RequestMapping("back/blog")
 @CrossOrigin
 public class BlogCategoryController {
