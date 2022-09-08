@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "博客管理")
 @RequestMapping("back/blog")
 @CrossOrigin
-public class blogManageController {
+public class BlogCategoryController {
     @Autowired
     private CategoriesService categoriesService;
 
