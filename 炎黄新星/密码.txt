@@ -11,3 +11,11 @@ tanjiali/1234.bms
 git账号：
 http://gitlab.zj.chinamobile.com/users/sign_in
 yhtanjiali/1234.bms
+
+测试环境：
+http://20.26.210.169:9100/bms/homePage/list.controller
+wb_tanjiali/Aa123456
+
+开发环境：
+http://bms-ec.yw.zj.chinamobile.com:9100/bms/###
+tanjiali/暂无
