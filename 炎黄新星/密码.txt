@@ -1,0 +1,13 @@
+工号：WB332901
+
+邮箱：
+http://mail.sinovatech.com/user/?q=base
+tanjiali@sinovatech.com/1234.bms
+
+周报：
+http://mail.sinovatech.com/bms/bms/adm/main.do
+tanjiali/1234.bms
+
+git账号：
+http://gitlab.zj.chinamobile.com/users/sign_in
+yhtanjiali/1234.bms
