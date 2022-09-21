@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * MyBatis配置类
- * Created by macro on 2019/4/8.
+ * Created by macro on 2022/9/7.
  */
 @Configuration
 @EnableTransactionManagement
@@ -20,5 +20,9 @@ public class MyBatisPlusConfig {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
         paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
         return paginationInterceptor;
+    }
+    @Bean
+    public MyMetaObjectHandler myMetaObjectHandler() {
+        return new MyMetaObjectHandler();
     }
 }

@@ -21,6 +21,14 @@
         <result property="userId" column="user_id"/>
         <result property="categoryName" column="categoryName"/>
     </resultMap>
+    <insert id="saveTag">
+        delete from blog_tag where blog_id=#{blogId};
+        INSERT INTO blog_tag(blog_id,tag_id)
+        VALUES
+        <foreach collection="tagList" item="item" index="index" separator=",">
+            (#{blogId},#{item})
+        </foreach>;
+    </insert>
 
     <select id="blogs" resultMap="blogsMap">
         SELECT
@@ -53,5 +61,13 @@
         <if test="categoryId!=null">
             and b.category_id=#{categoryId}
         </if>
+    </select>
+    <select id="getTagById" resultType="java.lang.Integer">
+        SELECT
+            tag_id
+        FROM
+            blog_tag
+        WHERE
+            blog_id = #{id}
     </select>
 </mapper>

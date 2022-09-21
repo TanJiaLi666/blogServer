@@ -1,11 +1,13 @@
 package com.tanjiali.blogadmin.pojo.blog;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @TableName("blog")
@@ -25,9 +27,9 @@ public class Blog {
     private Boolean appreciation;
     @TableField("is_comment_enabled")
     private Boolean commentEnabled;
-    @TableField("create_time")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     private Date createTime;
-    @TableField("update_time")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
     private Integer views;
     private Integer words;
@@ -35,11 +37,15 @@ public class Blog {
     private Integer readTime;
     @TableField("category_id")
     private Integer categoryId;
-    @TableField(exist = false)
-    private String categoryName;
     @TableField("is_top")
     private Boolean top;
     private String password;
     @TableField("user_id")
     private Integer userId;
+
+    @TableField(exist = false)
+    private String categoryName;
+    @TableField(exist = false)
+    private List<Integer> tagList;
+
 }
