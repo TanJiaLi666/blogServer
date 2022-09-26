@@ -28,7 +28,7 @@ public class UserController {
         if (StrUtil.isEmpty(dto.getToken())) {
             return PublicResult.failed("failed");
         }
-        return PublicResult.success(dto,"登录成功");
+        return PublicResult.success(dto,"登录成功!!");
     }
 
     @ApiOperation("表盘数据")
