@@ -1,6 +1,7 @@
 package com.tanjiali.blogadmin.service.blog.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -52,7 +53,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
     }
 
     @Override
-    public Blog getBlogById(Integer id) {
+    public Blog getBlogById(Long id) {
         Blog blog = this.getById(id);
         if (blog == null) {
             return null;
@@ -61,4 +62,40 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
         blog.setTagList(blogTagList);
         return blog;
     }
+
+    @Override
+    public Boolean updateBlog(Blog blog) {
+        return updateById(blog);
+    }
+
+    @Override
+    public Boolean deleteBlog(Long id) {
+        return removeById(id);
+    }
+
+    @Override
+    public Boolean updateRecommend(Long id, Boolean recommend) {
+        UpdateWrapper<Blog> wrapper = new UpdateWrapper();
+        wrapper.lambda()
+                .set(Blog::getRecommend,recommend)
+                .eq(Blog::getId, id);
+        return update(wrapper);
+    }
+
+    @Override
+    public Boolean updateTop(Long id, Boolean top) {
+        UpdateWrapper<Blog> wrapper = new UpdateWrapper();
+        wrapper.lambda()
+                .set(Blog::getTop,top)
+                .eq(Blog::getId, id);
+        return update(wrapper);
+    }
+
+    @Override
+    public Boolean updateVisibility(Long id, Blog blog) {
+        blog.setId(id);
+        return updateById(blog);
+    }
+
+
 }

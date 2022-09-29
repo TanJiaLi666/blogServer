@@ -10,7 +10,7 @@ import java.util.List;
 public interface BlogMapper extends BaseMapper<Blog> {
     IPage<Blog> blogs(IPage<Blog> page, String title, Integer categoryId);
 
-    void saveTag(int blogId, List<Integer> tagList);
+    void saveTag(Long blogId, List<Integer> tagList);
 
-    List<Integer> getTagById(Integer id);
+    List<Integer> getTagById(Long id);
 }

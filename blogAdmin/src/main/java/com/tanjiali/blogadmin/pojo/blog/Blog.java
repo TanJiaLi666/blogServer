@@ -13,7 +13,7 @@ import java.util.List;
 @TableName("blog")
 public class Blog {
     @TableId
-    private Integer id;
+    private Long id;
     private String title;
     @TableField("first_picture")
     private String firstPicture;

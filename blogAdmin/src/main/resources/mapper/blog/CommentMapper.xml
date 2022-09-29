@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanjiali.blogadmin.mapper.blog.CommentMapper">
+    <resultMap id="baseMap" type="com.tanjiali.blogadmin.pojo.blog.Comment" >
+        <id column="p_id" property="id"></id>
+        <result column="p_nickname" property="nickname"></result>
+        <result column="p_email" property="email"></result>
+        <result column="p_content" property="content"></result>
+        <result column="p_avatar" property="avatar"></result>
+        <result column="p_create_time" property="createTime"></result>
+        <result column="p_ip" property="ip"></result>
+        <result column="p_is_published" property="published"></result>
+        <result column="p_is_admin_comment" property="adminComment"></result>
+        <result column="p_page" property="page"></result>
+        <result column="p_is_notice" property="notice"></result>
+        <result column="p_blog_id" property="blogId"></result>
+        <result column="p_parent_comment_id" property="parentCommentId"></result>
+        <result column="p_website" property="website"></result>
+        <result column="p_qq" property="qq"></result>
+    </resultMap>
+    <resultMap id="commentList" extends="baseMap" type="com.tanjiali.blogadmin.pojo.blog.VO.BlogCommentVO">
+        <collection property="replyComments" columnPrefix="c_" ofType="com.tanjiali.blogadmin.pojo.blog.Comment">
+            <id column="id" property="id"/>
+            <result column="nickname" property="nickname"></result>
+            <result column="email" property="email"></result>
+            <result column="content" property="content"></result>
+            <result column="avatar" property="avatar"></result>
+            <result column="create_time" property="createTime"></result>
+            <result column="ip" property="ip"></result>
+            <result column="is_published" property="published"></result>
+            <result column="is_admin_comment" property="adminComment"></result>
+            <result column="page" property="page"></result>
+            <result column="is_notice" property="notice"></result>
+            <result column="blog_id" property="blogId"></result>
+            <result column="parent_comment_id" property="parentCommentId"></result>
+            <result column="website" property="website"></result>
+            <result column="qq" property="qq"></result>
+        </collection>
+    </resultMap>
+
+
+    <select id="getCommentListByQuery" resultMap="commentList" >
+        SELECT
+            parent.id  p_id,parent.nickname p_nickname, parent.email p_email,parent.content p_content,parent.avatar p_avatar,parent.create_time p_create_time,parent.ip p_ip, parent.is_published p_is_published,parent.is_admin_comment p_is_admin_comment,parent.page p_page,parent.is_notice p_is_notice,parent.blog_id p_blog_id,parent.parent_comment_id p_parent_comment_id,parent.website p_website,parent.qq p_qq,
+            children.id  c_id,children.nickname c_nickname, children.email c_email,children.content c_content,children.avatar c_avatar,children.create_time c_create_time,children.ip c_ip, children.is_published c_is_published,children.is_admin_comment c_is_admin_comment,children.page c_page,children.is_notice c_is_notice,children.blog_id c_blog_id,children.parent_comment_id c_parent_comment_id,children.website c_website,children.qq c_qq
+        FROM `comment` parent
+                 LEFT JOIN
+             (SELECT
+                  id,nickname, email,content,avatar,create_time,ip, is_published,is_admin_comment,page,is_notice,blog_id,parent_comment_id,website,qq
+              FROM `comment`) children
+             ON  children.parent_comment_id = parent.id
+        where 1=1
+        <if test="page != '' and page != null">
+            and parent.page = #{page}
+        </if>
+        <if test="blogId != '' and blogId != null">
+            and parent.blog_id = #{blogId}
+        </if>
+        and parent.parent_comment_id = -1
+    </select>
+</mapper>
