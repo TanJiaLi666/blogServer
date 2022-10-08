@@ -2,6 +2,7 @@ package com.tanjiali.blogadmin.controller.page.friendList;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.page.friendList.Friend;
+import com.tanjiali.blogadmin.pojo.page.friendList.vo.FriendListVO;
 import com.tanjiali.blogadmin.service.page.friendList.FriendListService;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -36,23 +37,70 @@ public class FriendListController {
         }
         return PublicResult.failed("失败");
     }
-    /**
-     * export function getFriendInfo() {
-     * 	return axios({
-     * 		url: 'friendInfo',
-     * 		method: 'GET'
-     *        })
-     * }
-     */
 
- /*
-    @ApiOperation("加载列表")
+    @ApiOperation("加载友链信息")
     @GetMapping("/friendInfo")
-    public PublicResult<PublicPage<Friend>> getFriendInfo() {
-        Page<Friend> friendPage = friendListService.getFriendInfo();
-        if (friendPage != null) {
-            return PublicResult.success(PublicPage.restPage(friendPage),"成功");
+    public PublicResult<FriendListVO> getFriendInfo() {
+        FriendListVO friendInfo = friendListService.getFriendInfo();
+        if (friendInfo != null) {
+            return PublicResult.success(friendInfo,"成功");
         }
         return PublicResult.failed("失败");
-    }*/
+    }
+    @ApiOperation("保存友链信息")
+    @PostMapping("/friend")
+    public PublicResult<Boolean> saveFriend(@RequestBody Friend friend) {
+        Boolean save = friendListService.saveFriend(friend);
+        if (save) {
+            return PublicResult.success(true,"保存成功");
+        }
+        return PublicResult.failed("失败");
+    }
+    @ApiOperation("更新友链信息")
+    @PutMapping("/friend")
+    public PublicResult<Boolean> updateFriend(@RequestBody Friend friend) {
+        Boolean updateFriend = friendListService.updateFriend(friend);
+        if (updateFriend) {
+            return PublicResult.success(true,"更新成功");
+        }
+        return PublicResult.failed("失败");
+    }
+
+    @ApiOperation("更新友链公开信息")
+    @PutMapping("/friend/published")
+    public PublicResult<Boolean> updatePublished(@RequestParam("id") Long id,
+                                                 @RequestParam("published") Boolean published) {
+        Boolean updateFriend = friendListService.updatePublished(id, published);
+        if (updateFriend) {
+            return PublicResult.success(true,"更新成功");
+        }
+        return PublicResult.failed("失败");
+    }
+    @ApiOperation("删除友链")
+    @DeleteMapping("/friend")
+    public PublicResult<Boolean> deleteFriendById(@RequestParam("id") Long id) {
+        Boolean updateFriend = friendListService.deleteFriendById(id);
+        if (updateFriend) {
+            return PublicResult.success(true,"更新成功");
+        }
+        return PublicResult.failed("失败");
+    }
+    @ApiOperation("更新友链信息公开")
+    @PutMapping("friendInfo/commentEnabled")
+    public PublicResult<Boolean> updateCommentEnabled(@RequestParam("commentEnabled") Boolean commentEnabled) {
+        Boolean updateFriend = friendListService.updateCommentEnabled(commentEnabled);
+        if (updateFriend) {
+            return PublicResult.success(true,"更新成功");
+        }
+        return PublicResult.failed("失败");
+    }
+    @ApiOperation("更新友链公开信息")
+    @PutMapping("friendInfo/content")
+    public PublicResult<Boolean> updateContent(@RequestBody FriendListVO friendListVO) {
+        Boolean updateFriend = friendListService.updateContent(friendListVO);
+        if (updateFriend) {
+            return PublicResult.success(true,"更新成功");
+        }
+        return PublicResult.failed("失败");
+    }
 }

@@ -2,7 +2,10 @@ package com.tanjiali.blogadmin.service.page.site;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tanjiali.blogadmin.pojo.page.site.SiteSetting;
+import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingInVO;
 import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingVO;
+
+import java.util.List;
 
 /**
  * @ClassName SiteSettingSeervice
@@ -14,6 +17,6 @@ import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingVO;
 public interface SiteSettingService extends IService<SiteSetting> {
     SiteSettingVO getSiteSettingData();
 
-    Boolean updateSiteSettings();
+    Boolean updateSiteSettings(SiteSettingInVO inVO);
 
 }

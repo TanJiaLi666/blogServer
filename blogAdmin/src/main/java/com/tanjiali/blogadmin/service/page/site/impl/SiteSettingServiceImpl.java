@@ -1,11 +1,15 @@
 package com.tanjiali.blogadmin.service.page.site.impl;
 
+import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tanjiali.blogadmin.mapper.page.site.SiteSettingMapper;
 import com.tanjiali.blogadmin.pojo.page.site.SiteSetting;
+import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingInVO;
 import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingVO;
 import com.tanjiali.blogadmin.service.page.site.SiteSettingService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.stream.Collectors;
  * @Version 1.0
  **/
 @Service
+@Slf4j
 public class SiteSettingServiceImpl extends ServiceImpl<SiteSettingMapper, SiteSetting> implements SiteSettingService {
     @Override
     public SiteSettingVO getSiteSettingData() {
@@ -50,7 +55,12 @@ public class SiteSettingServiceImpl extends ServiceImpl<SiteSettingMapper, SiteS
     }
 
     @Override
-    public Boolean updateSiteSettings() {
-        return null;
+    @Transactional
+    public Boolean updateSiteSettings(SiteSettingInVO inVO) {
+        log.info("删除id："+inVO.getDeleteIds());
+        this.removeByIds(inVO.getDeleteIds());
+        log.info("修改站点信息："+inVO.getSettings());
+        this.saveOrUpdateBatch(inVO.getSettings());
+        return true;
     }
 }

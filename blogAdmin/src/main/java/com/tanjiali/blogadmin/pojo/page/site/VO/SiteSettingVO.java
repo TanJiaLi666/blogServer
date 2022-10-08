@@ -1,12 +1,11 @@
 package com.tanjiali.blogadmin.pojo.page.site.VO;
 
-import com.tanjiali.blogadmin.pojo.page.site.SiteSetting;
 import lombok.Data;
 
 import java.util.List;
 
 /**
- * @ClassName SiteSettingVO
+ * @ClassName 数据输出到页面
  * @Description TODO
  * @Author Tanjiali
  * @Date 2022/9/30 17:27

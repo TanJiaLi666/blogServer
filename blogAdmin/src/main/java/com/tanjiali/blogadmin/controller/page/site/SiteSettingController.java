@@ -2,6 +2,8 @@ package com.tanjiali.blogadmin.controller.page.site;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.page.friendList.Friend;
+import com.tanjiali.blogadmin.pojo.page.site.SiteSetting;
+import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingInVO;
 import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingVO;
 import com.tanjiali.blogadmin.service.page.site.SiteSettingService;
 import com.tanjiali.blogpublicapi.api.PublicPage;
@@ -10,6 +12,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @ClassName SiteSettingController
@@ -38,26 +42,14 @@ public class SiteSettingController {
 
     @ApiOperation("加载列表")
     @PostMapping("/siteSettings")
-    public PublicResult<Boolean> updateSiteSettings() {
-        Boolean update = siteSettingService.updateSiteSettings();
+    public PublicResult<Boolean> updateSiteSettings(@RequestBody SiteSettingInVO inVO) {
+        Boolean update = siteSettingService.updateSiteSettings(inVO);
         if (update) {
             return PublicResult.success("成功");
         }
         return PublicResult.failed("失败");
     }
     /**
-     *
-     * export function update(settings, deleteIds) {
-     * 	return axios({
-     * 		url: 'siteSettings',
-     * 		method: 'POST',
-     * 		data: {
-     * 			settings,
-     * 			deleteIds
-     *        }
-     *    })
-     * }
-     *
      * export function getWebTitleSuffix() {
      * 	return axios({
      * 		url: 'webTitleSuffix',
