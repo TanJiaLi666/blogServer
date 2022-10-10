@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.pojo.system;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ import java.util.Date;
  * @Version 1.0
  **/
 @Data
+@TableName("schedule_job")
 public class ScheduleJob {
     @ApiModelProperty("任务id")
     @TableField("job_id")
