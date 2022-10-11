@@ -16,4 +16,5 @@ public class LogVO {
     private Integer pageNum;
     private Integer pageSize;
     private List<String> date;
+    private String uuid;
 }

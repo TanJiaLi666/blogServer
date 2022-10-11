@@ -16,4 +16,6 @@ public interface VisitLogService extends IService<VisitLog> {
     Page<VisitLog> getVisitLogList(LogVO vo);
 
     Boolean deleteVisitLogById(Long id);
+
+    Boolean deleteVisitLogByUuid(String uuid);
 }

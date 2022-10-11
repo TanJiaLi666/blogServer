@@ -33,6 +33,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         setValue("updateTime", DateUtil.date(), metaObject);
+        setValue("lastTime", DateUtil.date(), metaObject);
     }
 
     private void setValue(String fieldName, Object value, MetaObject metaObject) {

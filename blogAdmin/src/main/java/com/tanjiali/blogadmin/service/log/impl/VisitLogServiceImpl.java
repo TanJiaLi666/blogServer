@@ -1,5 +1,6 @@
 package com.tanjiali.blogadmin.service.log.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -25,10 +26,13 @@ public class VisitLogServiceImpl extends ServiceImpl<VisitLogMapper, VisitLog> i
     public Page<VisitLog> getVisitLogList(LogVO vo) {
         Page<VisitLog> page = new Page<>(vo.getPageNum(), vo.getPageSize());
         QueryWrapper<VisitLog> wrapper = new QueryWrapper<>();
+        LambdaQueryWrapper<VisitLog> lambda = wrapper.lambda();
         List<String> date = vo.getDate();
         if (date != null) {
-            wrapper.lambda()
-                    .between(VisitLog::getCreateTime, date.get(0), date.get(1));
+            lambda.between(VisitLog::getCreateTime, date.get(0), date.get(1));
+        }
+        if (vo.getUuid() != null && vo.getUuid() != "") {
+            lambda.eq(VisitLog::getUuid, vo.getUuid());
         }
         return page(page, wrapper);
     }
@@ -36,5 +40,12 @@ public class VisitLogServiceImpl extends ServiceImpl<VisitLogMapper, VisitLog> i
     @Override
     public Boolean deleteVisitLogById(Long id) {
         return removeById(id);
+    }
+
+    @Override
+    public Boolean deleteVisitLogByUuid(String uuid) {
+        LambdaQueryWrapper<VisitLog> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(VisitLog::getUuid, uuid);
+        return remove(wrapper);
     }
 }
