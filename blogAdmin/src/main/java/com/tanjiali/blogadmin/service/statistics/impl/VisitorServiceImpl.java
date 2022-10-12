@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tanjiali.blogadmin.mapper.statistics.VisitorMapper;
+import com.tanjiali.blogadmin.pojo.admin.CityVisitor;
+import com.tanjiali.blogadmin.pojo.admin.dto.VisitDTO;
 import com.tanjiali.blogadmin.pojo.log.ExceptionLog;
 import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
 import com.tanjiali.blogadmin.pojo.statistics.Visitor;
@@ -44,5 +46,15 @@ public class VisitorServiceImpl extends ServiceImpl<VisitorMapper, Visitor> impl
         removeById(id);
         logService.deleteVisitLogByUuid(uuid);
         return true;
+    }
+
+    @Override
+    public List<VisitDTO> getVisitRecordList(int num) {
+        return baseMapper.getVisitRecordList(num);
+    }
+
+    @Override
+    public List<CityVisitor> getCityVisitorList() {
+        return baseMapper.getCityVisitorList();
     }
 }

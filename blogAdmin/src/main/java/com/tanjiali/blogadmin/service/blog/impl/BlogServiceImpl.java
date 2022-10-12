@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tanjiali.blogadmin.mapper.blog.BlogMapper;
+import com.tanjiali.blogadmin.pojo.admin.dto.DashBoardDTO;
 import com.tanjiali.blogadmin.pojo.blog.Blog;
-import com.tanjiali.blogadmin.pojo.blog.BlogTag;
 import com.tanjiali.blogadmin.pojo.blog.Category;
 import com.tanjiali.blogadmin.pojo.blog.Tag;
 import com.tanjiali.blogadmin.pojo.blog.VO.BlogCategoryAndTagVO;
@@ -95,6 +95,11 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
     public Boolean updateVisibility(Long id, Blog blog) {
         blog.setId(id);
         return updateById(blog);
+    }
+
+    @Override
+    public List<DashBoardDTO> getCategoryBlogCountList() {
+        return baseMapper.getCategoryBlogCountList();
     }
 
 

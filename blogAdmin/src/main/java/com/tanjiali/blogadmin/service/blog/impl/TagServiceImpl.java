@@ -3,9 +3,12 @@ package com.tanjiali.blogadmin.service.blog.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tanjiali.blogadmin.mapper.blog.TagMapper;
+import com.tanjiali.blogadmin.pojo.admin.dto.DashBoardDTO;
 import com.tanjiali.blogadmin.pojo.blog.Tag;
 import com.tanjiali.blogadmin.service.blog.TagService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TagServiceImpl extends ServiceImpl<TagMapper,Tag> implements TagService {
@@ -31,5 +34,10 @@ public class TagServiceImpl extends ServiceImpl<TagMapper,Tag> implements TagSer
     @Override
     public Boolean deleteTag(Integer id) {
         return this.removeById(id);
+    }
+
+    @Override
+    public List<DashBoardDTO> getTagBlogCountList() {
+        return baseMapper.getTagBlogCountList();
     }
 }

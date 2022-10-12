@@ -2,8 +2,8 @@ package com.tanjiali.blogadmin.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.tanjiali.blogadmin.pojo.admin.Admin;
-import com.tanjiali.blogadmin.pojo.admin.dto.DashBoardDTO;
-import com.tanjiali.blogadmin.pojo.admin.dto.UserDTO;
+import com.tanjiali.blogadmin.pojo.admin.vo.DashBoardVO;
+import com.tanjiali.blogadmin.pojo.admin.vo.UserDTO;
 
 import com.tanjiali.blogadmin.service.admin.AdminService;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -33,8 +33,13 @@ public class UserController {
 
     @ApiOperation("表盘数据")
     @GetMapping("/dashboard")
-    public PublicResult<DashBoardDTO> dashboard(){
-        DashBoardDTO data = adminService.dashboard();
+    public PublicResult<DashBoardVO> dashboard(){
+        //地图效果 reference https://www.jianshu.com/p/028525cbd080
+        //reference https://echarts.apache.org/examples/zh/editor.html?c=map-polygon
+        DashBoardVO data = adminService.dashboard();
+        if (data == null) {
+            PublicResult.failed("加载失败");
+        }
         return PublicResult.success(data);
     }
 }

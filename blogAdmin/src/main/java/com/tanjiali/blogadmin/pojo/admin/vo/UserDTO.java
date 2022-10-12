@@ -1,4 +1,4 @@
-package com.tanjiali.blogadmin.pojo.admin.dto;
+package com.tanjiali.blogadmin.pojo.admin.vo;
 
 import com.tanjiali.blogadmin.pojo.admin.Admin;
 import lombok.Data;

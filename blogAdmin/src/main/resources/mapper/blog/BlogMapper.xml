@@ -70,4 +70,11 @@
         WHERE
             blog_id = #{id}
     </select>
+    <select id="getCategoryBlogCountList" resultType="com.tanjiali.blogadmin.pojo.admin.dto.DashBoardDTO">
+        SELECT blog.category_id as id, category.category_name as `name`, COUNT(1) as `value`
+        FROM `blog`
+            LEFT JOIN `category`
+            on `category`.id=`blog`.category_id
+        GROUP BY `blog`.category_id
+    </select>
 </mapper>

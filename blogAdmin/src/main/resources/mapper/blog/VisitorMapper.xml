@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanjiali.blogadmin.mapper.statistics.VisitorMapper">
+
+    <select id="getVisitRecordList" resultType="com.tanjiali.blogadmin.pojo.admin.dto.VisitDTO">
+        SELECT pv,uv,date FROM `visit_record` order by id desc limit #{num}
+    </select>
+    <select id="getCityVisitorList" resultType="com.tanjiali.blogadmin.pojo.admin.CityVisitor">
+        select city, uv from `city_visitor` order by uv desc
+    </select>
+</mapper>

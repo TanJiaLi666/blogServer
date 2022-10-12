@@ -2,6 +2,7 @@ package com.tanjiali.blogadmin.mapper.blog;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tanjiali.blogadmin.pojo.admin.dto.DashBoardDTO;
 import com.tanjiali.blogadmin.pojo.blog.Blog;
 import com.tanjiali.blogadmin.pojo.blog.Tag;
 
@@ -13,4 +14,6 @@ public interface BlogMapper extends BaseMapper<Blog> {
     void saveTag(Long blogId, List<Integer> tagList);
 
     List<Integer> getTagById(Long id);
+
+    List<DashBoardDTO> getCategoryBlogCountList();
 }

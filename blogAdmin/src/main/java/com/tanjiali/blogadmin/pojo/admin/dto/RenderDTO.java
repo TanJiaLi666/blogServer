@@ -2,16 +2,17 @@ package com.tanjiali.blogadmin.pojo.admin.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @ClassName
  * @Description TODO
  * @Author Tanjiali
- * @Date 2022/10/11 18:37
+ * @Date 2022/10/11 18:41
  * @Version 1.0
  **/
 @Data
-public class DashBoardDTO {
-    private Long id;
-    private String name;
-    private Integer value;
+public class RenderDTO {
+    private List<String> legend;
+    private List<DashBoardDTO> series;
 }
