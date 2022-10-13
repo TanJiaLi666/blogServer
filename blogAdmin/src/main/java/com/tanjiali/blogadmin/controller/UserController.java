@@ -34,6 +34,7 @@ public class UserController {
     @ApiOperation("表盘数据")
     @GetMapping("/dashboard")
     public PublicResult<DashBoardVO> dashboard(){
+        //应该引入redis
         //地图效果 reference https://www.jianshu.com/p/028525cbd080
         //reference https://echarts.apache.org/examples/zh/editor.html?c=map-polygon
         DashBoardVO data = adminService.dashboard();
