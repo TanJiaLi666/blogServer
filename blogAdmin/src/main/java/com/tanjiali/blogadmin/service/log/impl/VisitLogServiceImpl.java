@@ -48,4 +48,9 @@ public class VisitLogServiceImpl extends ServiceImpl<VisitLogMapper, VisitLog> i
         wrapper.eq(VisitLog::getUuid, uuid);
         return remove(wrapper);
     }
+
+    @Override
+    public void saveVisitLog(VisitLog visitLogObject) {
+        save(visitLogObject);
+    }
 }

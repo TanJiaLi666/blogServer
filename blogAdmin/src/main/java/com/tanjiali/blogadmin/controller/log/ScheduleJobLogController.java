@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.log.ScheduleJobLog;
 import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
 import com.tanjiali.blogadmin.service.log.ScheduleJobLogService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -37,6 +38,7 @@ public class ScheduleJobLogController {
     }
 
     @ApiOperation("删除任务日志信息")
+    @OperaLog("删除任务日志信息")
     @DeleteMapping("/job/log")
     public PublicResult<Boolean> deleteJobLogByLogId(@RequestParam("logId") Long logId){
         Boolean delete = jobLogService.deleteJobLogByLogId(logId);

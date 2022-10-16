@@ -31,6 +31,10 @@
             <groupId>com.tanjiali</groupId>
             <artifactId>blogPublicAPI</artifactId>
         </dependency>
+        <dependency>
+            <groupId>nl.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+        </dependency>
     </dependencies>
 
 

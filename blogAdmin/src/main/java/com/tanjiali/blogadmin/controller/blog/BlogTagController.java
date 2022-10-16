@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.blog.Category;
 import com.tanjiali.blogadmin.pojo.blog.Tag;
 import com.tanjiali.blogadmin.service.blog.TagService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -27,6 +28,7 @@ public class BlogTagController {
         return PublicResult.success(PublicPage.restPage(tags));
     }
     @ApiOperation("添加标签")
+    @OperaLog("添加标签")
     @PostMapping("/tag")
     public PublicResult<Boolean> addTag(@RequestBody Tag tag){
         Boolean success = tagService.addTag(tag);
@@ -36,6 +38,7 @@ public class BlogTagController {
         return PublicResult.failed("添加失败！");
     }
     @ApiOperation("编辑标签")
+    @OperaLog("编辑标签")
     @PutMapping("/tag")
     public PublicResult<Boolean> editTag(@RequestBody Tag tag){
         Boolean success = tagService.editTag(tag);
@@ -45,6 +48,7 @@ public class BlogTagController {
         return PublicResult.failed("编辑失败！");
     }
     @ApiOperation("删除标签")
+    @OperaLog("删除标签")
     @DeleteMapping("/tag")
     public PublicResult<Boolean> deleteTag(@RequestParam("id") Integer id){
         Boolean success = tagService.deleteTag(id);

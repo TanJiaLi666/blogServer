@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.controller.blog;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.blog.Category;
 import com.tanjiali.blogadmin.service.blog.CategoriesService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -26,6 +27,7 @@ public class BlogCategoryController {
         return PublicResult.success(PublicPage.restPage(category));
     }
     @ApiOperation("添加分类")
+    @OperaLog("添加分类")
     @PostMapping("/category")
     public PublicResult<Boolean> addCategory(@RequestBody Category category){
         Boolean success = categoriesService.addCategory(category);
@@ -35,6 +37,7 @@ public class BlogCategoryController {
         return PublicResult.failed("添加失败！");
     }
     @ApiOperation("编辑分类")
+    @OperaLog("编辑分类")
     @PutMapping("/category")
     public PublicResult<Boolean> editCategory(@RequestBody Category category){
         Boolean success = categoriesService.editCategory(category);
@@ -44,6 +47,7 @@ public class BlogCategoryController {
         return PublicResult.failed("编辑失败！");
     }
     @ApiOperation("删除分类")
+    @OperaLog("删除分类")
     @DeleteMapping("/category")
     public PublicResult<Boolean> deleteCategory(@RequestParam("id") Integer id){
         Boolean success = categoriesService.deleteCategory(id);

@@ -13,6 +13,7 @@ import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
  * @Version 1.0
  **/
 public interface OperationLogService extends IService<OperationLog> {
+    Boolean saveOperationLog(OperationLog log);
     Page<OperationLog> getOperationLogList(LogVO vo);
 
     Boolean deleteOperationLogById(Long id);

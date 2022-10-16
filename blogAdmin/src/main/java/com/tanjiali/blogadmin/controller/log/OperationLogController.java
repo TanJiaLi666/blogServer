@@ -6,6 +6,7 @@ import com.tanjiali.blogadmin.pojo.log.OperationLog;
 import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
 import com.tanjiali.blogadmin.service.log.LoginLogService;
 import com.tanjiali.blogadmin.service.log.OperationLogService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -39,6 +40,7 @@ public class OperationLogController {
     }
 
     @ApiOperation("删除操作日志信息")
+    @OperaLog("删除操作日志信息")
     @DeleteMapping("/operationLog")
     public PublicResult<Boolean> deleteOperationLogById(@RequestParam("id") Long id){
         Boolean delete = operationLogService.deleteOperationLogById(id);

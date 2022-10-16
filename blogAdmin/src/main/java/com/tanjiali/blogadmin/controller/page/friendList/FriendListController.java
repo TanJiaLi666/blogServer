@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.page.friendList.Friend;
 import com.tanjiali.blogadmin.pojo.page.friendList.vo.FriendListVO;
 import com.tanjiali.blogadmin.service.page.friendList.FriendListService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -48,6 +49,7 @@ public class FriendListController {
         return PublicResult.failed("失败");
     }
     @ApiOperation("保存友链信息")
+    @OperaLog("保存友链信息")
     @PostMapping("/friend")
     public PublicResult<Boolean> saveFriend(@RequestBody Friend friend) {
         Boolean save = friendListService.saveFriend(friend);
@@ -57,6 +59,7 @@ public class FriendListController {
         return PublicResult.failed("失败");
     }
     @ApiOperation("更新友链信息")
+    @OperaLog("更新友链信息")
     @PutMapping("/friend")
     public PublicResult<Boolean> updateFriend(@RequestBody Friend friend) {
         Boolean updateFriend = friendListService.updateFriend(friend);
@@ -67,6 +70,7 @@ public class FriendListController {
     }
 
     @ApiOperation("更新友链公开信息")
+    @OperaLog("更新友链公开信息")
     @PutMapping("/friend/published")
     public PublicResult<Boolean> updatePublished(@RequestParam("id") Long id,
                                                  @RequestParam("published") Boolean published) {
@@ -77,6 +81,7 @@ public class FriendListController {
         return PublicResult.failed("失败");
     }
     @ApiOperation("删除友链")
+    @OperaLog("删除友链")
     @DeleteMapping("/friend")
     public PublicResult<Boolean> deleteFriendById(@RequestParam("id") Long id) {
         Boolean updateFriend = friendListService.deleteFriendById(id);
@@ -86,6 +91,7 @@ public class FriendListController {
         return PublicResult.failed("失败");
     }
     @ApiOperation("更新友链信息公开")
+    @OperaLog("更新友链评论信息公开")
     @PutMapping("friendInfo/commentEnabled")
     public PublicResult<Boolean> updateCommentEnabled(@RequestParam("commentEnabled") Boolean commentEnabled) {
         Boolean updateFriend = friendListService.updateCommentEnabled(commentEnabled);
@@ -95,6 +101,7 @@ public class FriendListController {
         return PublicResult.failed("失败");
     }
     @ApiOperation("更新友链公开信息")
+    @OperaLog("更新友链公开信息内容")
     @PutMapping("friendInfo/content")
     public PublicResult<Boolean> updateContent(@RequestBody FriendListVO friendListVO) {
         Boolean updateFriend = friendListService.updateContent(friendListVO);

@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.controller.system;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.system.ScheduleJob;
 import com.tanjiali.blogadmin.service.system.ScheduleJobService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -37,6 +38,7 @@ public class ScheduleJobController {
         return PublicResult.failed("加载失败");
     }
     @ApiOperation("添加定时任务")
+    @OperaLog("添加定时任务")
     @PostMapping("/job")
     public PublicResult<Boolean> addJob(@RequestBody ScheduleJob job){
         Boolean save = jobService.addJob(job);
@@ -46,6 +48,7 @@ public class ScheduleJobController {
         return PublicResult.failed("定时任务添加失败");
     }
     @ApiOperation("修改定时任务")
+    @OperaLog("修改定时任务")
     @PutMapping("/job")
     public PublicResult<Boolean> editJob(@RequestBody ScheduleJob job){
         Boolean update = jobService.editJob(job);
@@ -55,6 +58,7 @@ public class ScheduleJobController {
         return PublicResult.failed("定时任务修改失败");
     }
     @ApiOperation("修改定时任务状态")
+    @OperaLog("修改定时任务状态")
     @PutMapping("/job/status")
     public PublicResult<Boolean> updateJobStatus(@RequestParam Long jobId,
                                                  @RequestParam Boolean status){
@@ -66,6 +70,7 @@ public class ScheduleJobController {
     }
 
     @ApiOperation("删除定时任务")
+    @OperaLog("删除定时任务")
     @DeleteMapping("/job")
     public PublicResult<Boolean> deleteJobById(@RequestParam Long jobId){
         Boolean update = jobService.deleteJobById(jobId);
@@ -75,6 +80,7 @@ public class ScheduleJobController {
         return PublicResult.failed("失败");
     }
     @ApiOperation("运行定时任务")
+    @OperaLog("定时任务立即执行一次")
     @PostMapping("/job/run")
     public PublicResult<Boolean> runJobOnce(@RequestParam Long jobId){
         Boolean update = jobService.runJobOnce(jobId);

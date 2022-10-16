@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.log.VisitLog;
 import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
 import com.tanjiali.blogadmin.service.log.VisitLogService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -38,6 +39,7 @@ public class VisitLogController {
     }
 
     @ApiOperation("删除访问日志信息")
+    @OperaLog("删除访问日志信息")
     @DeleteMapping("/visitLog")
     public PublicResult<Boolean> deleteVisitLogById(@RequestParam("id") Long id){
         Boolean delete = visitLogService.deleteVisitLogById(id);

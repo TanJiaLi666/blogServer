@@ -18,4 +18,6 @@ public interface VisitLogService extends IService<VisitLog> {
     Boolean deleteVisitLogById(Long id);
 
     Boolean deleteVisitLogByUuid(String uuid);
+
+    void saveVisitLog(VisitLog visitLogObject);
 }

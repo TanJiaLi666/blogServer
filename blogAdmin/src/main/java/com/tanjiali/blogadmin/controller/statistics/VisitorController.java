@@ -7,6 +7,7 @@ import com.tanjiali.blogadmin.pojo.statistics.Visitor;
 import com.tanjiali.blogadmin.service.log.ExceptionLogService;
 import com.tanjiali.blogadmin.service.log.VisitLogService;
 import com.tanjiali.blogadmin.service.statistics.VisitorService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -41,6 +42,7 @@ public class VisitorController {
     }
 
     @ApiOperation("删除访客信息")
+    @OperaLog("删除访客信息")
     @DeleteMapping("/visitor")
     public PublicResult<Boolean> deleteVisitor(@RequestParam("id") Long id,
                                                @RequestParam("uuid") String uuid){

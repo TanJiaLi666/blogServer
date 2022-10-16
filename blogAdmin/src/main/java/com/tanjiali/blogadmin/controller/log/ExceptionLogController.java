@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.log.ExceptionLog;
 import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
 import com.tanjiali.blogadmin.service.log.ExceptionLogService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -37,6 +38,7 @@ public class ExceptionLogController {
     }
 
     @ApiOperation("删除异常日志信息")
+    @OperaLog("删除异常日志信息")
     @DeleteMapping("/exceptionLog")
     public PublicResult<Boolean> deleteExceptionLogById(@RequestParam("id") Long id){
         Boolean delete = exceptionLogService.deleteExceptionLogById(id);

@@ -22,6 +22,11 @@ import java.util.List;
 @Service
 public class OperationLogServiceImpl extends ServiceImpl<OperationLogMapper, OperationLog> implements OperationLogService {
     @Override
+    public Boolean saveOperationLog(OperationLog log) {
+        return save(log);
+    }
+
+    @Override
     public Page<OperationLog> getOperationLogList(LogVO vo) {
         Page<OperationLog> page = new Page<>(vo.getPageNum(), vo.getPageSize());
         QueryWrapper<OperationLog> wrapper = new QueryWrapper<>();

@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.controller.blog;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.blog.Moment;
 import com.tanjiali.blogadmin.service.blog.MomentService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -25,6 +26,7 @@ public class BlogMomentController {
         return PublicResult.success(PublicPage.restPage(moments));
     }
     @ApiOperation("添加动态")
+    @OperaLog("添加动态")
     @PostMapping("/moment")
     public PublicResult<Boolean> addMoment(@RequestBody Moment moment){
         Boolean success = momentService.addMoment(moment);
@@ -34,6 +36,7 @@ public class BlogMomentController {
         return PublicResult.failed("添加失败！");
     }
     @ApiOperation("编辑动态")
+    @OperaLog("编辑动态")
     @PutMapping("/moment")
     public PublicResult<Boolean> editMoment(@RequestBody Moment moment){
         Boolean success = momentService.editMoment(moment);
@@ -43,6 +46,7 @@ public class BlogMomentController {
         return PublicResult.failed("编辑失败！");
     }
     @ApiOperation("删除动态")
+    @OperaLog("删除动态")
     @DeleteMapping("/moment")
     public PublicResult<Boolean> deleteMoment(@RequestParam("id") Integer id){
         Boolean success = momentService.deleteMoment(id);
@@ -52,6 +56,7 @@ public class BlogMomentController {
         return PublicResult.failed("删除失败！");
     }
     @ApiOperation("发布动态")
+    @OperaLog("发布动态")
     @PutMapping("/moment/published")
     public PublicResult<Boolean> publishedMoment(@RequestParam("id") Integer id,
                                                  @RequestParam("published") Boolean published){

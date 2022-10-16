@@ -6,6 +6,7 @@ import com.tanjiali.blogadmin.pojo.page.site.SiteSetting;
 import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingInVO;
 import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingVO;
 import com.tanjiali.blogadmin.service.page.site.SiteSettingService;
+import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -40,7 +41,8 @@ public class SiteSettingController {
         return PublicResult.failed("失败");
     }
 
-    @ApiOperation("加载列表")
+    @ApiOperation("更新配置列表")
+    @OperaLog("更新配置列表")
     @PostMapping("/siteSettings")
     public PublicResult<Boolean> updateSiteSettings(@RequestBody SiteSettingInVO inVO) {
         Boolean update = siteSettingService.updateSiteSettings(inVO);
