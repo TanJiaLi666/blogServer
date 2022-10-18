@@ -77,4 +77,12 @@
             on `category`.id=`blog`.category_id
         GROUP BY `blog`.category_id
     </select>
+    <select id="getBlogTagByid" resultType="java.lang.Integer">
+        SELECT
+            blog_id
+        FROM
+            blog_tag
+        WHERE
+            tag_id = #{id}
+    </select>
 </mapper>

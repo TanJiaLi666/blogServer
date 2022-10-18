@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.blog.Category;
 import com.tanjiali.blogadmin.pojo.blog.Tag;
 import com.tanjiali.blogadmin.service.blog.TagService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -30,6 +31,7 @@ public class BlogTagController {
     @ApiOperation("添加标签")
     @OperaLog("添加标签")
     @PostMapping("/tag")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> addTag(@RequestBody Tag tag){
         Boolean success = tagService.addTag(tag);
         if (success) {
@@ -40,6 +42,7 @@ public class BlogTagController {
     @ApiOperation("编辑标签")
     @OperaLog("编辑标签")
     @PutMapping("/tag")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> editTag(@RequestBody Tag tag){
         Boolean success = tagService.editTag(tag);
         if (success) {
@@ -50,11 +53,12 @@ public class BlogTagController {
     @ApiOperation("删除标签")
     @OperaLog("删除标签")
     @DeleteMapping("/tag")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> deleteTag(@RequestParam("id") Integer id){
         Boolean success = tagService.deleteTag(id);
         if (success) {
             return PublicResult.success(true,"删除成功！！");
         }
-        return PublicResult.failed("删除失败！");
+        return PublicResult.failed("删除失败！检查标签是否正在被使用");
     }
 }

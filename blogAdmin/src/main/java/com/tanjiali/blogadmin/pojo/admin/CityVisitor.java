@@ -1,5 +1,6 @@
 package com.tanjiali.blogadmin.pojo.admin;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Data;
  * @Version 1.0
  **/
 @Data
+@TableName("city_visitor")
 public class CityVisitor {
     private String city;//城市名称
     private Integer uv;//独立访客数量

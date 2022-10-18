@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.page.friendList.Friend;
 import com.tanjiali.blogadmin.pojo.page.friendList.vo.FriendListVO;
 import com.tanjiali.blogadmin.service.page.friendList.FriendListService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -51,6 +52,7 @@ public class FriendListController {
     @ApiOperation("保存友链信息")
     @OperaLog("保存友链信息")
     @PostMapping("/friend")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> saveFriend(@RequestBody Friend friend) {
         Boolean save = friendListService.saveFriend(friend);
         if (save) {
@@ -61,6 +63,7 @@ public class FriendListController {
     @ApiOperation("更新友链信息")
     @OperaLog("更新友链信息")
     @PutMapping("/friend")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updateFriend(@RequestBody Friend friend) {
         Boolean updateFriend = friendListService.updateFriend(friend);
         if (updateFriend) {
@@ -72,6 +75,7 @@ public class FriendListController {
     @ApiOperation("更新友链公开信息")
     @OperaLog("更新友链公开信息")
     @PutMapping("/friend/published")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updatePublished(@RequestParam("id") Long id,
                                                  @RequestParam("published") Boolean published) {
         Boolean updateFriend = friendListService.updatePublished(id, published);
@@ -83,6 +87,7 @@ public class FriendListController {
     @ApiOperation("删除友链")
     @OperaLog("删除友链")
     @DeleteMapping("/friend")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> deleteFriendById(@RequestParam("id") Long id) {
         Boolean updateFriend = friendListService.deleteFriendById(id);
         if (updateFriend) {
@@ -93,6 +98,7 @@ public class FriendListController {
     @ApiOperation("更新友链信息公开")
     @OperaLog("更新友链评论信息公开")
     @PutMapping("friendInfo/commentEnabled")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updateCommentEnabled(@RequestParam("commentEnabled") Boolean commentEnabled) {
         Boolean updateFriend = friendListService.updateCommentEnabled(commentEnabled);
         if (updateFriend) {
@@ -103,6 +109,7 @@ public class FriendListController {
     @ApiOperation("更新友链公开信息")
     @OperaLog("更新友链公开信息内容")
     @PutMapping("friendInfo/content")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updateContent(@RequestBody FriendListVO friendListVO) {
         Boolean updateFriend = friendListService.updateContent(friendListVO);
         if (updateFriend) {

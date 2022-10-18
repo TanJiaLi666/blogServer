@@ -16,4 +16,6 @@ public interface BlogMapper extends BaseMapper<Blog> {
     List<Integer> getTagById(Long id);
 
     List<DashBoardDTO> getCategoryBlogCountList();
+
+    List<Integer> getBlogTagByid(Integer id);
 }

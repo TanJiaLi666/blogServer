@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.log.ExceptionLog;
 import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
 import com.tanjiali.blogadmin.service.log.ExceptionLogService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "异常日志管理")
 @RequestMapping("back/log")
 @CrossOrigin
+@LoginCheck("用户需要登录验证")
 public class ExceptionLogController {
     @Autowired
     private ExceptionLogService exceptionLogService;

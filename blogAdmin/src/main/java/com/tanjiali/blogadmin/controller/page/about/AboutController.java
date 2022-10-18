@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.controller.page.about;
 
 import com.tanjiali.blogadmin.pojo.page.about.VO.AboutVO;
 import com.tanjiali.blogadmin.service.page.about.AboutService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -38,6 +39,7 @@ public class AboutController {
     @ApiOperation("修改关于信息")
     @OperaLog("修改关于信息")
     @PutMapping("/about")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updateAbout(@RequestBody AboutVO aboutVO){
         Boolean updateAbout = aboutService.updateAbout(aboutVO);
         if (updateAbout) {

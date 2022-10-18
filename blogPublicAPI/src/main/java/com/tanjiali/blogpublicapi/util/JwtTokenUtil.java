@@ -38,6 +38,18 @@ public class JwtTokenUtil {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
+    public JwtTokenUtil() {
+        if (secret == null) {
+            secret = "tanjiali%fe_rryer_111";
+        }
+        if (expiration == null) {
+            expiration = 86400L;
+        }
+        if (tokenHead == null) {
+            tokenHead = "Bearer";
+        }
+    }
+
     /**
      * 根据负责生成JWT的token
      */

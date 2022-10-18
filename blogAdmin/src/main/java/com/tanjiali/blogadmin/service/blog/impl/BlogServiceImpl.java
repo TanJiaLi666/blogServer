@@ -1,6 +1,7 @@
 package com.tanjiali.blogadmin.service.blog.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,11 +10,13 @@ import com.tanjiali.blogadmin.mapper.blog.BlogMapper;
 import com.tanjiali.blogadmin.pojo.admin.dto.DashBoardDTO;
 import com.tanjiali.blogadmin.pojo.blog.Blog;
 import com.tanjiali.blogadmin.pojo.blog.Category;
+import com.tanjiali.blogadmin.pojo.blog.Comment;
 import com.tanjiali.blogadmin.pojo.blog.Tag;
 import com.tanjiali.blogadmin.pojo.blog.VO.BlogCategoryAndTagVO;
 import com.tanjiali.blogadmin.pojo.blog.VO.BlogVO;
 import com.tanjiali.blogadmin.service.blog.BlogService;
 import com.tanjiali.blogadmin.service.blog.CategoriesService;
+import com.tanjiali.blogadmin.service.blog.CommentService;
 import com.tanjiali.blogadmin.service.blog.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,9 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
     private CategoriesService categoriesService;
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private CommentService commentService;
     @Override
     public BlogVO blogs(Integer pageNum, Integer pageSize, String title, Integer categoryId) {
         Page<Blog> page = new Page<>(pageNum,pageSize);
@@ -65,12 +71,19 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
 
     @Override
     public Boolean updateBlog(Blog blog) {
+        List<Integer> tagList = blog.getTagList();
+        this.getBaseMapper().saveTag(blog.getId(), tagList);
         return updateById(blog);
     }
 
     @Override
+    @Transactional
     public Boolean deleteBlog(Long id) {
-        return removeById(id);
+        LambdaQueryWrapper<Comment> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Comment::getBlogId, id);
+        boolean b = removeById(id);
+        commentService.remove(wrapper);
+        return b;
     }
 
     @Override
@@ -100,6 +113,11 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
     @Override
     public List<DashBoardDTO> getCategoryBlogCountList() {
         return baseMapper.getCategoryBlogCountList();
+    }
+
+    @Override
+    public List<Integer> getBlogTagByid(Integer id) {
+        return baseMapper.getBlogTagByid(id);
     }
 
 

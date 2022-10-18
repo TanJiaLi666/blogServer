@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.controller.blog;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.blog.Category;
 import com.tanjiali.blogadmin.service.blog.CategoriesService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -29,6 +30,7 @@ public class BlogCategoryController {
     @ApiOperation("添加分类")
     @OperaLog("添加分类")
     @PostMapping("/category")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> addCategory(@RequestBody Category category){
         Boolean success = categoriesService.addCategory(category);
         if (success) {
@@ -39,6 +41,7 @@ public class BlogCategoryController {
     @ApiOperation("编辑分类")
     @OperaLog("编辑分类")
     @PutMapping("/category")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> editCategory(@RequestBody Category category){
         Boolean success = categoriesService.editCategory(category);
         if (success) {
@@ -49,11 +52,12 @@ public class BlogCategoryController {
     @ApiOperation("删除分类")
     @OperaLog("删除分类")
     @DeleteMapping("/category")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> deleteCategory(@RequestParam("id") Integer id){
         Boolean success = categoriesService.deleteCategory(id);
         if (success) {
             return PublicResult.success(true,"删除成功！！");
         }
-        return PublicResult.failed("删除失败！");
+        return PublicResult.failed("删除失败！检查分类是否正在被使用");
     }
 }

@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.controller.blog;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.blog.Moment;
 import com.tanjiali.blogadmin.service.blog.MomentService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -28,6 +29,7 @@ public class BlogMomentController {
     @ApiOperation("添加动态")
     @OperaLog("添加动态")
     @PostMapping("/moment")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> addMoment(@RequestBody Moment moment){
         Boolean success = momentService.addMoment(moment);
         if (success) {
@@ -38,6 +40,7 @@ public class BlogMomentController {
     @ApiOperation("编辑动态")
     @OperaLog("编辑动态")
     @PutMapping("/moment")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> editMoment(@RequestBody Moment moment){
         Boolean success = momentService.editMoment(moment);
         if (success) {
@@ -48,6 +51,7 @@ public class BlogMomentController {
     @ApiOperation("删除动态")
     @OperaLog("删除动态")
     @DeleteMapping("/moment")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> deleteMoment(@RequestParam("id") Integer id){
         Boolean success = momentService.deleteMoment(id);
         if (success) {
@@ -58,6 +62,7 @@ public class BlogMomentController {
     @ApiOperation("发布动态")
     @OperaLog("发布动态")
     @PutMapping("/moment/published")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> publishedMoment(@RequestParam("id") Integer id,
                                                  @RequestParam("published") Boolean published){
         Boolean success = momentService.publishedMoment(id, published);

@@ -6,6 +6,7 @@
 	<modules>
 		<module>blogAdmin</module>
 		<module>blogPublicAPI</module>
+		<module>blogFront</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

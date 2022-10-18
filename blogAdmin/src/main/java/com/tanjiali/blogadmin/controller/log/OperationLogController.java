@@ -6,6 +6,7 @@ import com.tanjiali.blogadmin.pojo.log.OperationLog;
 import com.tanjiali.blogadmin.pojo.log.vo.LogVO;
 import com.tanjiali.blogadmin.service.log.LoginLogService;
 import com.tanjiali.blogadmin.service.log.OperationLogService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "登录日志管理")
 @RequestMapping("back/log")
 @CrossOrigin
+@LoginCheck("用户需要登录验证")
 public class OperationLogController {
     @Autowired
     private OperationLogService operationLogService;
@@ -40,7 +42,6 @@ public class OperationLogController {
     }
 
     @ApiOperation("删除操作日志信息")
-    @OperaLog("删除操作日志信息")
     @DeleteMapping("/operationLog")
     public PublicResult<Boolean> deleteOperationLogById(@RequestParam("id") Long id){
         Boolean delete = operationLogService.deleteOperationLogById(id);

@@ -1,0 +1,32 @@
+server:
+  port: 8099
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true #&allowMultiQueries=true为开启批量执行sql的开关
+    username: tan
+    password: 1234
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 10
+    timeout: 5000
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    auto-mapping-behavior: partial
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    root: debug
+
+jwt:
+  secret: tanjiali%fe_rryer_111 #私钥
+  expiration: 86400 #过期时间
+  tokenHead: Bearer
+  tokenHeader: Authorization

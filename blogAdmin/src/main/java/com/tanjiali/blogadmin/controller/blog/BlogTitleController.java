@@ -4,6 +4,7 @@ import com.tanjiali.blogadmin.pojo.blog.Blog;
 import com.tanjiali.blogadmin.pojo.blog.VO.BlogVO;
 import com.tanjiali.blogadmin.pojo.blog.VO.BlogCategoryAndTagVO;
 import com.tanjiali.blogadmin.service.blog.BlogService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicResult;
 import io.swagger.annotations.Api;
@@ -37,6 +38,7 @@ public class BlogTitleController {
     @ApiOperation("添加文章")
     @PostMapping("/blog")
     @OperaLog("添加博客文章")
+    @LoginCheck("用户需要登录验证")
     public PublicResult saveBlog(@RequestBody Blog blog){
         Boolean save= blogService.saveBlog(blog);
         if (save) {
@@ -56,6 +58,7 @@ public class BlogTitleController {
     @ApiOperation("更新文章")
     @PutMapping("/blog")
     @OperaLog("更新文章")
+    @LoginCheck("用户需要登录验证")
     public PublicResult updateBlog(@RequestBody Blog blog){
         Boolean update= blogService.updateBlog(blog);
         if (!update) {
@@ -67,6 +70,7 @@ public class BlogTitleController {
     @ApiOperation("删除文章")
     @OperaLog("删除文章")
     @DeleteMapping("/blog")
+    @LoginCheck("用户需要登录验证")
     public PublicResult deleteBlog(@RequestParam("id") Long id){
         Boolean delete= blogService.deleteBlog(id);
         if (!delete) {
@@ -77,6 +81,7 @@ public class BlogTitleController {
     @ApiOperation("推荐文章")
     @OperaLog("推荐文章")
     @PutMapping("/blog/recommend")
+    @LoginCheck("用户需要登录验证")
     public PublicResult updateRecommend(@RequestParam("id") Long id,
                                         @RequestParam("recommend") Boolean recommend){
         Boolean update= blogService.updateRecommend(id,recommend);
@@ -88,6 +93,7 @@ public class BlogTitleController {
     @ApiOperation("置顶文章")
     @OperaLog("置顶文章")
     @PutMapping("/blog/top")
+    @LoginCheck("用户需要登录验证")
     public PublicResult updateTop(@RequestParam("id") Long id,
                                         @RequestParam("top") Boolean top){
         Boolean update= blogService.updateTop(id,top);
@@ -99,6 +105,7 @@ public class BlogTitleController {
     @ApiOperation("文章可见性")
     @OperaLog("编辑文章可见性")
     @PutMapping("/{id}/visibility")
+    @LoginCheck("用户需要登录验证")
     public PublicResult updateVisibility(@PathVariable("id") Long id ,
                                          @RequestBody Blog blog){
         Boolean update= blogService.updateVisibility(id,blog);

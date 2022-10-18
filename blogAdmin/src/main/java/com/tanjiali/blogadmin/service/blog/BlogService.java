@@ -28,4 +28,6 @@ public interface BlogService extends IService<Blog> {
     Boolean updateVisibility(Long id, Blog blog);
 
     List<DashBoardDTO> getCategoryBlogCountList();
+
+    List<Integer> getBlogTagByid(Integer id);
 }

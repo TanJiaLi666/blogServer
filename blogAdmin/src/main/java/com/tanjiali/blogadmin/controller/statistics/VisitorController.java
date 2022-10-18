@@ -7,6 +7,7 @@ import com.tanjiali.blogadmin.pojo.statistics.Visitor;
 import com.tanjiali.blogadmin.service.log.ExceptionLogService;
 import com.tanjiali.blogadmin.service.log.VisitLogService;
 import com.tanjiali.blogadmin.service.statistics.VisitorService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -44,6 +45,7 @@ public class VisitorController {
     @ApiOperation("删除访客信息")
     @OperaLog("删除访客信息")
     @DeleteMapping("/visitor")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> deleteVisitor(@RequestParam("id") Long id,
                                                @RequestParam("uuid") String uuid){
         Boolean delete = visitorService.deleteVisitor(id,uuid);

@@ -3,6 +3,7 @@ package com.tanjiali.blogadmin.controller.system;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tanjiali.blogadmin.pojo.system.ScheduleJob;
 import com.tanjiali.blogadmin.service.system.ScheduleJobService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -40,6 +41,7 @@ public class ScheduleJobController {
     @ApiOperation("添加定时任务")
     @OperaLog("添加定时任务")
     @PostMapping("/job")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> addJob(@RequestBody ScheduleJob job){
         Boolean save = jobService.addJob(job);
         if (save) {
@@ -50,6 +52,7 @@ public class ScheduleJobController {
     @ApiOperation("修改定时任务")
     @OperaLog("修改定时任务")
     @PutMapping("/job")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> editJob(@RequestBody ScheduleJob job){
         Boolean update = jobService.editJob(job);
         if (update) {
@@ -60,6 +63,7 @@ public class ScheduleJobController {
     @ApiOperation("修改定时任务状态")
     @OperaLog("修改定时任务状态")
     @PutMapping("/job/status")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updateJobStatus(@RequestParam Long jobId,
                                                  @RequestParam Boolean status){
         Boolean update = jobService.updateJobStatus(jobId, status);
@@ -72,6 +76,7 @@ public class ScheduleJobController {
     @ApiOperation("删除定时任务")
     @OperaLog("删除定时任务")
     @DeleteMapping("/job")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> deleteJobById(@RequestParam Long jobId){
         Boolean update = jobService.deleteJobById(jobId);
         if (update) {
@@ -82,6 +87,7 @@ public class ScheduleJobController {
     @ApiOperation("运行定时任务")
     @OperaLog("定时任务立即执行一次")
     @PostMapping("/job/run")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> runJobOnce(@RequestParam Long jobId){
         Boolean update = jobService.runJobOnce(jobId);
         if (update) {

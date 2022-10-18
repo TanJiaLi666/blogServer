@@ -5,6 +5,7 @@ import com.tanjiali.blogadmin.pojo.blog.Blog;
 import com.tanjiali.blogadmin.pojo.blog.Comment;
 import com.tanjiali.blogadmin.pojo.blog.VO.BlogCommentVO;
 import com.tanjiali.blogadmin.service.blog.CommentService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -45,6 +46,7 @@ public class BlogCommentController {
     @ApiOperation("修改评论")
     @OperaLog("修改评论")
     @PutMapping("/comment")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> editComment(@RequestBody Comment comment){
         Boolean update= commentService.editComment(comment);
         if (update) {
@@ -55,6 +57,7 @@ public class BlogCommentController {
     @ApiOperation("删除评论")
     @OperaLog("删除评论")
     @DeleteMapping("/comment")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> deleteCommentById(Long id){
         Boolean update= commentService.deleteCommentById(id);
         if (update) {
@@ -65,6 +68,7 @@ public class BlogCommentController {
     @ApiOperation("公开评论")
     @OperaLog("公开评论")
     @PutMapping("/comment/published")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updatePublished(@RequestParam("id") Long id,
                                                  @RequestParam("published") Boolean published ){
         Boolean update = commentService.updateButton(Comment::getPublished, id, published);
@@ -76,6 +80,7 @@ public class BlogCommentController {
     @ApiOperation("更新通知")
     @OperaLog("更新通知")
     @PutMapping("/comment/notice")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updateNotice(@RequestParam("id") Long id,
                                               @RequestParam("notice") Boolean notice){
         Boolean update = commentService.updateButton(Comment::getNotice, id, notice);

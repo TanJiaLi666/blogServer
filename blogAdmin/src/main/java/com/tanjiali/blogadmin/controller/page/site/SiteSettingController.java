@@ -6,6 +6,7 @@ import com.tanjiali.blogadmin.pojo.page.site.SiteSetting;
 import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingInVO;
 import com.tanjiali.blogadmin.pojo.page.site.VO.SiteSettingVO;
 import com.tanjiali.blogadmin.service.page.site.SiteSettingService;
+import com.tanjiali.blogpublicapi.annotation.LoginCheck;
 import com.tanjiali.blogpublicapi.annotation.OperaLog;
 import com.tanjiali.blogpublicapi.api.PublicPage;
 import com.tanjiali.blogpublicapi.api.PublicResult;
@@ -44,6 +45,7 @@ public class SiteSettingController {
     @ApiOperation("更新配置列表")
     @OperaLog("更新配置列表")
     @PostMapping("/siteSettings")
+    @LoginCheck("用户需要登录验证")
     public PublicResult<Boolean> updateSiteSettings(@RequestBody SiteSettingInVO inVO) {
         Boolean update = siteSettingService.updateSiteSettings(inVO);
         if (update) {
